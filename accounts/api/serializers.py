@@ -12,6 +12,16 @@ class LoginSerializer(serializers.Serializer):
     username = serializers.CharField()
     password = serializers.CharField()
 
+<<<<<<< HEAD
+=======
+    def validate(self, data):
+        if not User.objects.filter(username=data['username'].lower()).exists():
+            raise exceptions.ValidationError({
+                'username': 'User does not exist.'
+            })
+        return data
+
+>>>>>>> 4-user-authentication-api
 
 class SignupSerializer(serializers.ModelSerializer):  # ModelSerializer表示serializer.save时能够把用户成功创建出来
     username = serializers.CharField(max_length=20, min_length=6)
@@ -26,11 +36,19 @@ class SignupSerializer(serializers.ModelSerializer):  # ModelSerializer表示ser
     def validate(self, data):
         if User.objects.filter(username=data['username'].lower()).exists():
             raise exceptions.ValidationError({
+<<<<<<< HEAD
                 'message': 'This username has been occupied.'
             })
         if User.objects.filter(email=data['email'].lower()).exists():
             raise exceptions.ValidationError({
                 'message': 'This email address has been occupied.'
+=======
+                'username': 'This username has been occupied.'
+            })
+        if User.objects.filter(email=data['email'].lower()).exists():
+            raise exceptions.ValidationError({
+                'email': 'This email address has been occupied.'
+>>>>>>> 4-user-authentication-api
             })
         return data
 

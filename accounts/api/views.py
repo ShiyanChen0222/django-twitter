@@ -53,8 +53,8 @@ class AccountViewSet(viewsets.ViewSet):
             }, status=400)
 
         # validation ok, login
-        username = serializer.validated_data['username']
-        password = serializer.validated_data['password']
+        username = serializer.validated_data['username'].lower()
+        password = serializer.validated_data['password'].lower()
 
         # authenticate user之后才能login
         user = django_authenticate(username=username, password=password)

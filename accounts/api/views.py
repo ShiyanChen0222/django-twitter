@@ -31,7 +31,10 @@ class AccountViewSet(viewsets.ViewSet):
     # accounts是主资源目录，下面的次目录可以自定义为action
     # detail指url后面不需要id，它不是定义在某个object上的动作，而是定义在整体资源上的动作
     def login_status(self, request):
-        data = {'has_logged_in': request.user.is_authenticated}
+        data = {
+            'has_logged_in': request.user.is_authenticated,
+            'ip': request.META['REMOTE_ADDR'],
+        }
         if request.user.is_authenticated:
             data['user'] = UserSerializer(request.user).data
         return Response(data)

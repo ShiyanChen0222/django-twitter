@@ -4,6 +4,7 @@ from django.contrib.contenttypes.models import ContentType
 from tweets.models import Tweet
 from comments.models import Comment
 from likes.models import Like
+from newsfeeds.models import NewsFeed
 from rest_framework.test import APIClient
 
 
@@ -35,6 +36,9 @@ class TestCase(DjangoTestCase):
         if content is None:
             content = 'default comment content'
         return Comment.objects.create(user=user, tweet=tweet, content=content)
+
+    def create_newsfeed(self, user, tweet):
+        return NewsFeed.objects.create(user=user, tweet=tweet)
 
     def create_like(self, user, target):
         # target is comment or tweet

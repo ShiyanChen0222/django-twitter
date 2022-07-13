@@ -8,6 +8,7 @@ from friendships.api.serializers import (
     FollowerSerializer,
     FriendshipSerializerForCreate,
 )
+from friendships.api.paginations import FriendshipPagination
 from django.contrib.auth.models import User
 
 
@@ -19,25 +20,23 @@ class FriendshipViewSet(viewsets.GenericViewSet):
     # queryset.filter(pk=1) 查询一下这个 object 在不在
     queryset = User.objects.all()
     serializer_class = FriendshipSerializerForCreate
+    # 一般来说，不同的 views 所需要的 pagination 规则肯定是不同的，因此一般都需要自定义
+    pagination_class = FriendshipPagination
 
     # GET /api/friendships/<pk>/followers/
     @action(methods=['GET'], detail=True, permission_classes=[AllowAny])
     def followers(self, request, pk):
         friendships = Friendship.objects.filter(to_user_id=pk)
-        serializer = FollowerSerializer(friendships, many=True)
-        return Response(
-            {'followers': serializer.data},
-            status=status.HTTP_200_OK,
-        )
+        page = self.paginate_queryset(friendships)
+        serializer = FollowerSerializer(page, many=True, context={'request': request})
+        return self.get_paginated_response(serializer.data)
 
     @action(methods=['GET'], detail=True, permission_classes=[AllowAny])
     def followings(self, request, pk):
         friendships = Friendship.objects.filter(from_user_id=pk)
-        serializer = FollowingSerializer(friendships, many=True)
-        return Response(
-            {'followings': serializer.data},
-            status=status.HTTP_200_OK,
-        )
+        page = self.paginate_queryset(friendships)
+        serializer = FollowingSerializer(page, many=True, context={'request': request})
+        return self.get_paginated_response(serializer.data)
 
     @action(methods=['POST'], detail=True, permission_classes=[IsAuthenticated])
     def follow(self, request, pk):
@@ -57,7 +56,7 @@ class FriendshipViewSet(viewsets.GenericViewSet):
 
         instance = serializer.save()
         return Response(
-            FollowingSerializer(instance).data,
+            FollowingSerializer(instance, context={'request': request}).data,
             status=status.HTTP_201_CREATED
         )
 

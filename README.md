@@ -8,9 +8,9 @@ This is a backend social networking system based on Python and Django, aiming fo
 | Technology           | Description          | Website                                           |
 | -------------------- | ------------------- | ---------------------------------------------- |
 | Django               | Python-based MVC framework   | https://www.djangoproject.com/        |
-| DjangoRESTframework  | REST framework               | https://spring.io/projects/spring-security     |
+| DjangoRESTframework  | REST framework               | https://www.django-rest-framework.org/     |
 | MySQL                | Sql DB           | https://www.mysql.com/                      |
-| Hbase                | NoSql DB         | https://www.mongodb.com                        |
+| HBase                | NoSql DB         | https://hbase.apache.org/                      |
 | Memcached            | Distributed in-memory cache        | https://memcached.org/       |
 | Redis                | Distributed in-memory cache        | https://redis.io/            |
 | RabbitMQ             | Message Queue    | https://www.rabbitmq.com/                      |

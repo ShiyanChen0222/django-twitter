@@ -47,4 +47,3 @@ class NewsFeedServiceTests(TestCase):
 
         feeds = NewsFeedService.get_cached_newsfeeds(self.linghu.id)
         self.assertEqual([f.id for f in feeds], [feed2.id, feed1.id])
-        

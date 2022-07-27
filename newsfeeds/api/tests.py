@@ -3,6 +3,7 @@ from rest_framework.test import APIClient
 from testing.testcases import TestCase
 from utils.paginations import EndlessPagination
 from newsfeeds.services import NewsFeedService
+from newsfeeds.models import NewsFeed
 
 
 NEWSFEEDS_URL = '/api/newsfeeds/'

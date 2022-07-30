@@ -1,6 +1,9 @@
 *.box
 .vagrant
 Vagrantfile
+*.tar.gz
+hbase-2.4.13/
+thrift-0.16.0/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

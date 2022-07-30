@@ -17,6 +17,8 @@ from rest_framework import permissions
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from utils.permissions import IsObjectOwner
+from django.utils.decorators import method_decorator
+from ratelimit.decorators import ratelimit
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -32,6 +34,7 @@ class AccountViewSet(viewsets.ViewSet):
     serializer_class = SignupSerializer
 
     @action(methods=['GET'], detail=False)
+    @method_decorator(ratelimit(key='ip', rate='3/s', method='GET', block=True))
     # accounts是主资源目录，下面的次目录可以自定义为action
     # detail指url后面不需要id，它不是定义在某个object上的动作，而是定义在整体资源上的动作
     def login_status(self, request):
@@ -44,11 +47,13 @@ class AccountViewSet(viewsets.ViewSet):
         return Response(data)
 
     @action(methods=['POST'], detail=False)
+    @method_decorator(ratelimit(key='ip', rate='3/s', method='POST', block=True))
     def logout(self, request):
         django_logout(request)
         return Response({'success': True})
 
     @action(methods=['POST'], detail=False)
+    @method_decorator(ratelimit(key='ip', rate='3/s', method='POST', block=True))
     def login(self, request):
         # get username and password from request, convert them to serializer
         serializer = LoginSerializer(data=request.data)  # POST用request.data获取参数
@@ -79,6 +84,7 @@ class AccountViewSet(viewsets.ViewSet):
         })
 
     @action(methods=['POST'], detail=False)
+    @method_decorator(ratelimit(key='ip', rate='3/s', method='POST', block=True))
     def signup(self, request):
         serializer = SignupSerializer(data=request.data)
         if not serializer.is_valid():

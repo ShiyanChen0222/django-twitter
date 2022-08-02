@@ -1,3 +1,7 @@
+"""
+Deprecated
+use newsfeeds.hbase_models.HBaseNewsFeed instead
+"""
 from django.db import models
 from django.db.models.signals import post_save
 from newsfeeds.listeners import push_newsfeed_to_cache

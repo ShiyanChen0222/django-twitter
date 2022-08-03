@@ -5,7 +5,7 @@ from django.core.cache import caches
 from tweets.models import Tweet
 from comments.models import Comment
 from likes.models import Like
-from newsfeeds.models import NewsFeed
+from newsfeeds.services import NewsFeedService
 from friendships.services import FriendshipService
 from rest_framework.test import APIClient
 from utils.redis_client import RedisClient
@@ -35,7 +35,8 @@ class TestCase(DjangoTestCase):
     def clear_cache(self):
         caches['testing'].clear()
         RedisClient.clear()
-        # GateKeeper.set_kv('switch_friendship_to_hbase', 'percent', 100)
+        GateKeeper.turn_on('switch_newsfeed_to_hbase')
+        GateKeeper.turn_on('switch_friendship_to_hbase')
 
     @property
     def anonymous_client(self):
@@ -68,7 +69,11 @@ class TestCase(DjangoTestCase):
         return Comment.objects.create(user=user, tweet=tweet, content=content)
 
     def create_newsfeed(self, user, tweet):
-        return NewsFeed.objects.create(user=user, tweet=tweet)
+        if GateKeeper.is_switch_on('switch_newsfeed_to_hbase'):
+            created_at = tweet.timestamp
+        else:
+            created_at = tweet.created_at
+        return NewsFeedService.create(user_id=user.id, tweet_id=tweet.id, created_at=created_at)
 
     def create_like(self, user, target):
         # target is comment or tweet

@@ -15,10 +15,3 @@ This is a backend social networking system based on Python and Django, aiming fo
 | Redis                | Distributed in-memory cache        | https://redis.io/            |
 | RabbitMQ             | Message Queue    | https://www.rabbitmq.com/                      |
 | Amazon S3            | Object storage service        | https://www.amazon.com/aws/s3            |
-
-
-
-## Models & APIs
-
-<img width="1440" alt="image" src="https://user-images.githubusercontent.com/70275050/178489411-de28b355-2210-48c2-bceb-0d27fed80b65.png">
-<img width="1440" alt="image" src="https://user-images.githubusercontent.com/70275050/178489340-77cb7ab5-649e-457a-84b8-a0fcf102803c.png">

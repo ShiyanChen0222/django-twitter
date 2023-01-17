@@ -1,6 +1,6 @@
-# Social Networking System
+# Django Twitter Backend Service
 
-This is a backend social networking system based on Python and Django, aiming for industry use with low latency and high throughput. It provides APIs for building friendships, posting messages and photos, news feeds, giving comments and likes, pushing notifications, etc. It adopts Redis, Memcached, denormalization, and HBase to reduce database queries and increase query efficiency. It uses Message Queue to deliver asynchoronized tasks and cut down response time.
+A backend social networking service based on Python and Django, aiming for low latency and high throughput. It provides APIs for building friendships, posting messages and photos, news feeds, giving comments and likes, pushing notifications, etc. It adopts Redis, Memcached, denormalization, and HBase to reduce database queries and increase query efficiency. It uses Message Queue to deliver asynchoronized tasks and cut down response time.
 
 
 ## Technologies

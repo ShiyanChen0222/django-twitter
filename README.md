@@ -1,7 +1,15 @@
 # Django Twitter Backend Service
 
-A backend social networking service based on Python and Django, aiming for low latency and high throughput. It provides APIs for building friendships, posting messages and photos, news feeds, giving comments and likes, pushing notifications, etc. It adopts Redis, Memcached, denormalization, and HBase to reduce database queries and increase query efficiency. It uses Message Queue to deliver asynchoronized tasks and cut down response time.
+## Introduction
+A backend social networking service based on Python and Django, aiming for low latency and high throughput. It provides APIs for building friendships, posting messages and photos, news feeds, giving comments and likes, pushing notifications, etc.
 
+- Built low-latency SNS backend using Python, Django & RESTful API.
+- Implemented newsfeeds using push model, and implemented endless pagination for mobile-friendly user experience.
+- Reduced queries for read-heavy tables by using Redis and Memcached. 
+- Reduced database queries by using denormalization to store numbers of comments and likes.
+- Improved database query performance of friendships and newsfeeds by adopting HBase to support range queries.
+- Reduced response time by leveraging Redis as message queue to deliver asynchronized tasks.
+- Committed over 10000 lines of code changes, spent over 3 months to finish.
 
 ## Technologies
 
@@ -13,5 +21,4 @@ A backend social networking service based on Python and Django, aiming for low l
 | HBase                | NoSql DB         | https://hbase.apache.org/                      |
 | Memcached            | Distributed in-memory cache        | https://memcached.org/       |
 | Redis                | Distributed in-memory cache        | https://redis.io/            |
-| RabbitMQ             | Message Queue    | https://www.rabbitmq.com/                      |
 | Amazon S3            | Object storage service        | https://www.amazon.com/aws/s3            |
